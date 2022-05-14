@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta charset = "utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div style="width:80vw;">
+  <canvas id="myChart"></canvas>
+</div>
+<div>
+<button onclick = 'settype("line")'>
+Line
+</button>
+<button onclick = 'settype("bar")'>
+bar
+</button>
+<button onclick = 'settype("pie")'>
+pie
+</button>
+<button onclick = 'settype("doughnut")'>
+doughnut
+</button>
+<button onclick = 'update()'>
+업데이트
+</button>
+<button onclick = 'adddata()'>
+추가
+</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+function adddata(){
+	data.datasets[0].data.push(Math.floor(Math.random()*100))
+	data.labels.push("new data")
+	myChart.update()
+}
+
+function update(){
+	for ( let i=0 ; i<mydata.length ; i++ ) {
+		mydata[i] = Math.floor(Math.random() * 100)
+	}
+	myChart.update()
+}
+
+function settype(gtype) {
+	config.type = gtype
+	myChart.update()
+}
+mydata = [25, 95, 35, 85, 15, 90, 20]
+labels = ['January','February','March','April','May','June', 'July']
+
+data = {
+    labels: labels,
+    datasets: [{
+      label: 'My Data Graph',
+      backgroundColor: ['gray','Red','Orange','Yellow','Green','Blue','violet','pink'],
+      borderColor: 'blue',
+      data: mydata,
+      tension: 0.5
+    }]
+ }
+
+config = {
+    type: 'bar',
+    data: data,
+}
+
+myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+);
+</script>
+</body>
+</html>
